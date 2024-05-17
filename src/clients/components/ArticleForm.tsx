@@ -26,9 +26,6 @@ export const ArticleForm = ({
   const { categories } = useFetchCategories();
   const { tags } = useFetchTags();
 
-  console.log("categories", categories);
-  console.log("tags", tags);
-
   return (
     <Stack>
       <TextInput

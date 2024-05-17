@@ -2,9 +2,8 @@
 
 import { CategoryCard, CategoryForm } from "@/clients/components";
 import { useCrudCategories } from "@/clients/hooks/useCrudCategories/useCrudCategories";
-import { CardCategory } from "@/clients/types";
+import { Category } from "@/server/types";
 import { Stack, Title, Button, Modal, Box, Loader } from "@mantine/core";
-import e from "express";
 
 export default function CategoryList() {
   const {
@@ -28,7 +27,7 @@ export default function CategoryList() {
       <Button onClick={() => setModalOpen(true)}>Create New Category</Button>
       {categories && (
         <Stack>
-          {categories.map((category: CardCategory) => (
+          {categories.map((category: Category) => (
             <CategoryCard
               key={category.id}
               category={category}
