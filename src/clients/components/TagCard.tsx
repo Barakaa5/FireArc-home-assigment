@@ -1,8 +1,9 @@
+import { Tag } from "@/server/types";
 import { Card, Group, Title, Text, Button } from "@mantine/core";
 
 interface TagCardProps {
-  tag: any;
-  onEdit: (tag: any) => void;
+  tag: Tag;
+  onEdit: (tag: Tag) => void;
   onDelete: (id: string) => void;
 }
 

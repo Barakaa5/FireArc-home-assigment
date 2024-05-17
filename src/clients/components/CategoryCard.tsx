@@ -1,9 +1,10 @@
+import { Category } from "@/server/types";
 import { Card, Group, Title, Text, Button } from "@mantine/core";
 import Link from "next/link";
 
 interface CategoryCardProps {
-  category: any;
-  onEdit: (category: any) => void;
+  category: Category;
+  onEdit: (category: Category) => void;
   onDelete: (id: string) => void;
 }
 
