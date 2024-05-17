@@ -2,8 +2,17 @@
 
 import { ArticleCard, ArticleForm } from "@/clients/components";
 import { useCrudArticles } from "@/clients/hooks";
+import { useFetchCategories } from "@/clients/hooks/useCrudCategories/useFetchCategories";
 import { CardArticle } from "@/clients/types";
-import { Stack, Title, Button, Modal, Box, Loader, Group } from "@mantine/core";
+import {
+  Stack,
+  Title,
+  Button,
+  Modal,
+  Box,
+  Loader,
+  Tooltip,
+} from "@mantine/core";
 
 export default function ArticleList() {
   const {
@@ -21,12 +30,21 @@ export default function ArticleList() {
     resetAll,
   } = useCrudArticles();
 
+  const { categories } = useFetchCategories();
+
   return (
     <Stack align="center" justify="center" mt={20} px={0} py={20}>
       <Title>Articles</Title>
-      <Button onClick={() => setModalOpen(true)}>Create New Article</Button>
+      <Tooltip label="First create a category" disabled={categories?.length}>
+        <Button
+          onClick={() => setModalOpen(true)}
+          disabled={!categories?.length}
+        >
+          Create New Article
+        </Button>
+      </Tooltip>
       {articles && (
-        <Group>
+        <Stack>
           {articles.map((article: CardArticle) => (
             <ArticleCard
               key={article.id}
@@ -35,7 +53,7 @@ export default function ArticleList() {
               onDelete={handleDelete}
             />
           ))}
-        </Group>
+        </Stack>
       )}
       {isLoading && <Loader mt={40} />}
       {error && <Box>Failed to load articles</Box>}

@@ -1,6 +1,15 @@
-import { Stack, TextInput, Textarea, Button } from "@mantine/core";
+import {
+  Stack,
+  TextInput,
+  Textarea,
+  Button,
+  Select,
+  MultiSelect,
+} from "@mantine/core";
 import { CardArticle } from "../types";
-import { getRandomImage } from "../utils";
+import { useFetchCategories } from "../hooks/useCrudCategories/useFetchCategories";
+import { Category, Tag } from "@/server/types";
+import { useFetchTags } from "../hooks/useCrudTags/useFetchTags";
 
 interface ArticleFormProps {
   formData: CardArticle;
@@ -14,6 +23,12 @@ export const ArticleForm = ({
   onSubmit,
   editing,
 }: ArticleFormProps) => {
+  const { categories } = useFetchCategories();
+  const { tags } = useFetchTags();
+
+  console.log("categories", categories);
+  console.log("tags", tags);
+
   return (
     <Stack>
       <TextInput
@@ -35,6 +50,27 @@ export const ArticleForm = ({
         value={formData.body}
         onChange={(e) =>
           setFormData({ ...formData, body: e.currentTarget.value })
+        }
+      />
+      <Select
+        label="Category"
+        placeholder="Select a category"
+        value={formData.categoryId}
+        onChange={(value) => setFormData({ ...formData, categoryId: value })}
+        data={
+          categories?.map((category: Category) => ({
+            value: category.id,
+            label: category.title,
+          })) || []
+        }
+      />
+      <MultiSelect
+        label="Tags"
+        placeholder="Select tags"
+        value={formData.tagIds}
+        onChange={(value) => setFormData({ ...formData, tagIds: value })}
+        data={
+          tags?.map((tag: Tag) => ({ value: tag.id, label: tag.title })) || []
         }
       />
       <Button onClick={onSubmit}>

@@ -4,9 +4,9 @@ type Article = {
   title: string;
   description: string;
   body: string;
-  imageUrl: string;
   categoryId: string;
   tagIds: string[];
+  imageUrl: string;
 };
 
 type Category = {

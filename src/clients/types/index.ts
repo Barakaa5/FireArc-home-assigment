@@ -1,19 +1,6 @@
-export type CardArticle = {
-  id: string;
-  title: string;
-  description: string;
-  body: string;
-  imageUrl: string;
-};
+import { Article, Category, Tag } from "@/server/types";
 
-export type CardCategory = {
-  id: string;
-  title: string;
-  description: string;
-};
-
-export type CardTag = {
-  id: string;
-  title: string;
-  description: string;
-};
+export interface CardArticle extends Article {
+  category?: Category;
+  tags?: Tag[];
+}

@@ -1,8 +1,8 @@
-import { getRandomImage } from "@/clients/utils";
 import { readDatabase, writeDatabase } from "@/server/utils";
-import { Article } from "@/server/types";
+import { Article, Category, Tag } from "@/server/types";
 import { NextRequest, NextResponse } from "next/server";
 import { v4 as uuidv4 } from "uuid";
+import { CardArticle } from "@/clients/types";
 
 // Swagger definition
 /**
@@ -15,8 +15,13 @@ import { v4 as uuidv4 } from "uuid";
  *         description: Success
  */
 export async function GET() {
-  const { articles } = readDatabase();
-  return NextResponse.json(articles);
+  const { articles, categories, tags } = readDatabase();
+  const articlesWithDetails: CardArticle[] = articles.map((article) => ({
+    ...article,
+    category: categories.find((category) => category.id === article.categoryId),
+    tags: tags.filter((tag) => article.tagIds.includes(tag.id)),
+  }));
+  return NextResponse.json(articlesWithDetails);
 }
 
 /**
@@ -29,8 +34,16 @@ export async function GET() {
  *         description: Created
  */
 export async function POST(request: NextRequest) {
-  const data: Article = await request.json();
-  const newArticle = { ...data, id: uuidv4(), imageUrl: getRandomImage() };
+  const data: Omit<Article, "id" | "imageUrl"> = await request.json();
+  const imageUrl = `https://picsum.photos/id/${Math.floor(
+    Math.random() * 1000
+  )}/200/200`;
+  const newArticle = {
+    ...data,
+    id: uuidv4(),
+    imageUrl,
+    date: new Date().toISOString(),
+  };
 
   const db = readDatabase();
   db.articles.push(newArticle);
@@ -55,13 +68,13 @@ export async function POST(request: NextRequest) {
 export async function PUT(request: NextRequest) {
   const { searchParams } = new URL(request.url);
   const id = searchParams.get("id");
-  const data: Article = await request.json();
+  const data: Omit<Article, "id" | "imageUrl" | "date"> = await request.json();
 
   const db = readDatabase();
   const articleIndex = db.articles.findIndex((article) => article.id === id);
 
   if (articleIndex > -1) {
-    db.articles[articleIndex] = { ...data, id: id! };
+    db.articles[articleIndex] = { ...db.articles[articleIndex], ...data };
     writeDatabase(db);
     return NextResponse.json(db.articles[articleIndex]);
   }

@@ -2,7 +2,7 @@
 
 import { TagCard, TagForm } from "@/clients/components";
 import { useCrudTags } from "@/clients/hooks/useCrudTags/useCrudTags";
-import { CardTag } from "@/clients/types";
+import { Tag } from "@/server/types";
 import { Stack, Title, Button, Modal, Box, Loader } from "@mantine/core";
 
 export default function TagList() {
@@ -27,7 +27,7 @@ export default function TagList() {
       <Button onClick={() => setModalOpen(true)}>Create New Tag</Button>
       {tags && (
         <Stack>
-          {tags.map((tag: CardTag) => (
+          {tags.map((tag: Tag) => (
             <TagCard
               key={tag.id}
               tag={tag}

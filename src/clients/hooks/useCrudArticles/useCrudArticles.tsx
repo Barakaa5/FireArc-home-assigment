@@ -3,7 +3,7 @@ import { useFetchArticles } from "./useFetchArticles";
 import { useCreateArticle } from "./useCreateArticle";
 import { useUpdateArticle } from "./useUpdateArticle";
 import { useDeleteArticle } from "./useDeleteArticle";
-import { CardArticle } from "@/clients/types";
+import { Article } from "@/server/types";
 
 export const useCrudArticles = () => {
   const { articles, error, isLoading } = useFetchArticles();
@@ -12,11 +12,14 @@ export const useCrudArticles = () => {
   const { deleteArticle } = useDeleteArticle();
 
   const [modalOpen, setModalOpen] = useState(false);
-  const [formData, setFormData] = useState<CardArticle>({
+  const [formData, setFormData] = useState<Article>({
     id: "",
+    date: "",
     title: "",
     description: "",
     body: "",
+    categoryId: "",
+    tagIds: [],
     imageUrl: "",
   });
   const [editing, setEditing] = useState(false);
@@ -37,9 +40,12 @@ export const useCrudArticles = () => {
     setEditingId(article.id);
     setFormData({
       id: article.id,
+      date: article.date,
       title: article.title,
       description: article.description,
       body: article.body,
+      categoryId: article.categoryId,
+      tagIds: article.tagIds,
       imageUrl: article.imageUrl,
     });
     setModalOpen(true);
@@ -50,7 +56,16 @@ export const useCrudArticles = () => {
   };
 
   const resetFormData = () => {
-    setFormData({ id: "", title: "", description: "", body: "", imageUrl: "" });
+    setFormData({
+      id: "",
+      date: "",
+      title: "",
+      description: "",
+      body: "",
+      categoryId: "",
+      tagIds: [],
+      imageUrl: "",
+    });
     setEditing(false);
     setEditingId(null);
   };

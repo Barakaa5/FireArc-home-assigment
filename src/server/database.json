@@ -1,13 +1,22 @@
 {
-  "articles": [
+  "articles": [],
+  "categories": [
     {
-      "id": "4f4d0111-08fd-4402-aae9-36c628820f0b",
-      "title": "f",
-      "description": "ff",
-      "body": "fff",
-      "imageUrl": "https://picsum.photos/id/390/200/200"
+      "title": "ccc",
+      "description": "ccc",
+      "id": "5d4b6a5d-c344-463e-90b8-cf97f84e0994"
     }
   ],
-  "categories": [],
-  "tags": []
+  "tags": [
+    {
+      "title": "gggg",
+      "description": "gggggg",
+      "id": "3302c694-e86d-41ef-994a-aee6c38aad7c"
+    },
+    {
+      "title": "22",
+      "description": "22222",
+      "id": "7aa40fbe-088c-432a-8fcb-582ae8e2c839"
+    }
+  ]
 }
