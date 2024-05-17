@@ -1,9 +1,8 @@
 "use client";
 
-import { Stack, Title, Button, Group, AppShell } from "@mantine/core";
+import { Stack, Title, Button, Group } from "@mantine/core";
 import { IconCategory, IconArticle, IconTags } from "@tabler/icons-react";
 import { useRouter } from "next/navigation";
-import Image from "next/image";
 import HeaderLayout from "@/clients/components/HeaderLayout";
 
 export default function Home() {
