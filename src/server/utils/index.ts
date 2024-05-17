@@ -2,7 +2,7 @@ import fs from "fs";
 import path from "path";
 import { Article, Category, Tag } from "../types";
 
-const dbPath = path.resolve(process.cwd(), "src/server/database.json");
+const dbPath = path.resolve(process.cwd(), "public/database.json");
 
 export const readDatabase = (): {
   articles: Article[];

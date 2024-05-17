@@ -3,7 +3,7 @@
 import { CategoryCard, CategoryForm } from "@/clients/components";
 import { useCrudCategories } from "@/clients/hooks/useCrudCategories/useCrudCategories";
 import { Category } from "@/server/types";
-import { Stack, Title, Button, Modal, Box, Loader } from "@mantine/core";
+import { Stack, Title, Button, Modal, Box, Loader, Group } from "@mantine/core";
 
 export default function CategoryList() {
   const {
@@ -26,7 +26,7 @@ export default function CategoryList() {
       <Title>Categories</Title>
       <Button onClick={() => setModalOpen(true)}>Create New Category</Button>
       {categories && (
-        <Stack>
+        <Group>
           {categories.map((category: Category) => (
             <CategoryCard
               key={category.id}
@@ -35,7 +35,7 @@ export default function CategoryList() {
               onDelete={handleDelete}
             />
           ))}
-        </Stack>
+        </Group>
       )}
       {isLoading && <Loader mt={40} />}
       {error && <Box>Failed to load categories</Box>}

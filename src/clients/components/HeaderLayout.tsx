@@ -1,5 +1,6 @@
 import { Anchor, AppShell, Box, Button, Group } from "@mantine/core";
 import Image from "next/image";
+import Link from "next/link";
 
 export default function HeaderLayout({
   children,
@@ -12,9 +13,9 @@ export default function HeaderLayout({
         <Group justify="space-between">
           <Image src={"/FireArc-Logo.png"} alt="Logo" width={200} height={50} />
           <Group>
-            <Anchor href="/categories">Categories</Anchor>
-            <Anchor href="/articles">Articles</Anchor>
-            <Anchor href="/tags">Tags</Anchor>
+            <Link href="/categories">Categories</Link>
+            <Link href="/articles">Articles</Link>
+            <Link href="/tags">Tags</Link>
           </Group>
         </Group>
       </AppShell.Header>

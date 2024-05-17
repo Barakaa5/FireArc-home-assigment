@@ -12,6 +12,7 @@ import {
   Box,
   Loader,
   Tooltip,
+  Group,
 } from "@mantine/core";
 
 export default function ArticleList() {
@@ -44,7 +45,7 @@ export default function ArticleList() {
         </Button>
       </Tooltip>
       {articles && (
-        <Stack>
+        <Group>
           {articles.map((article: CardArticle) => (
             <ArticleCard
               key={article.id}
@@ -53,7 +54,7 @@ export default function ArticleList() {
               onDelete={handleDelete}
             />
           ))}
-        </Stack>
+        </Group>
       )}
       {isLoading && <Loader mt={40} />}
       {error && <Box>Failed to load articles</Box>}

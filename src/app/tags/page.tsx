@@ -3,7 +3,7 @@
 import { TagCard, TagForm } from "@/clients/components";
 import { useCrudTags } from "@/clients/hooks/useCrudTags/useCrudTags";
 import { Tag } from "@/server/types";
-import { Stack, Title, Button, Modal, Box, Loader } from "@mantine/core";
+import { Stack, Title, Button, Modal, Box, Loader, Group } from "@mantine/core";
 
 export default function TagList() {
   const {
@@ -26,7 +26,7 @@ export default function TagList() {
       <Title>Tags</Title>
       <Button onClick={() => setModalOpen(true)}>Create New Tag</Button>
       {tags && (
-        <Stack>
+        <Group>
           {tags.map((tag: Tag) => (
             <TagCard
               key={tag.id}
@@ -35,7 +35,7 @@ export default function TagList() {
               onDelete={handleDelete}
             />
           ))}
-        </Stack>
+        </Group>
       )}
       {isLoading && <Loader mt={40} />}
       {error && <Box>Failed to load tags</Box>}
