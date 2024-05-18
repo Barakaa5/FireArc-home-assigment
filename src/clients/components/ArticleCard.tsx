@@ -41,21 +41,23 @@ export const ArticleCard = ({
         <Text size="sm" c="dimmed">
           Category: {article.category?.title || "None"}
         </Text>
-        <Group>
-          Tags:{" "}
-          {article.tags?.map((tag: Tag) => (
-            <Badge key={tag.id}>{tag.title}</Badge>
-          ))}
-        </Group>
-        <Divider />
-        <Text size="sm" mt={10}>
-          Body: {article.body}
-        </Text>
+        {Boolean(article?.tags?.length) && (
+          <Group>
+            Tags:{" "}
+            {article.tags?.map((tag: Tag) => (
+              <Badge key={tag.id}>{tag.title}</Badge>
+            ))}
+          </Group>
+        )}
+        <Divider my={10} />
+        <Text size="sm">Body: {article.body}</Text>
       </Stack>
 
       <Group justify="flex-end" mt={20}>
-        <Button onClick={() => onEdit(article)}>Edit</Button>
-        <Button color="red" onClick={() => onDelete(article.id)}>
+        <Button size="xs" onClick={() => onEdit(article)}>
+          Edit
+        </Button>
+        <Button size="xs" color="red" onClick={() => onDelete(article.id)}>
           Delete
         </Button>
       </Group>

@@ -17,8 +17,10 @@ export const TagCard = ({ tag, onEdit, onDelete }: TagCardProps) => {
         Description: {tag.description}
       </Text>
       <Group justify="flex-end" mt={20}>
-        <Button onClick={() => onEdit(tag)}>Edit</Button>
-        <Button color="red" onClick={() => onDelete(tag.id)}>
+        <Button size="xs" onClick={() => onEdit(tag)}>
+          Edit
+        </Button>
+        <Button size="xs" color="red" onClick={() => onDelete(tag.id)}>
           Delete
         </Button>
       </Group>
